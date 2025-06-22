@@ -4998,7 +4998,7 @@ def add_to_cart():
 
     color = request.form.get('color')
     size = request.form.get('size')
-
+    
     try:
         quantity = int(request.form.get('quantity', 1))
         if quantity < 1:
@@ -5024,9 +5024,6 @@ def add_to_cart():
     cart.append(item)
     session['cart'] = cart
     session.modified = True
-
-    with open("orders.txt", "a", encoding="utf-8") as f:
-     f.write(f"PID: {pid}, Name: {product['name']}, Color: {color}, Size: {size}, Quantity: {quantity}, Price: {product['price']}\n")
 
     print("🛒 Current Cart:", session['cart'])
     return redirect(url_for('cart'))
