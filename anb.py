@@ -1,8 +1,10 @@
+import requests
 from flask import Flask, render_template_string, redirect, url_for, session, request, jsonify, render_template
 from waitress import serve
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 import os
+
 
 if not os.path.exists("orders.txt"):
     with open("orders.txt", "w", encoding="utf-8") as f:
@@ -5074,7 +5076,20 @@ def checkout():
             f.write(f"رسوم التوصيل: {delivery_price} شيكل\n")
             f.write(f"المجموع الكلي: {total} شيكل\n")
             f.write("==================\n\n")
-
+        webhook_url = "https://hooks.zapier.com/hooks/catch/23486054/uo015mm/"
+        try:
+            requests.post(webhook_url, json={
+                "name": name,
+                "phone": phone,
+                "address": address,
+                "region": region,
+                "payment": payment_method,
+                "notes": notes,
+                "total": total,
+                "products": cart
+            })
+        except Exception as e:
+            print("فشل ارسال البيانات للـ Zapier:", e)
         return render_template_string("""
               <!DOCTYPE html>
               <html lang="ar" dir="rtl">
@@ -5134,18 +5149,6 @@ def checkout():
                       <p>💰 المبلغ الإجمالي: {{ total }} شيكل</p>
                       <a href="/">العودة للمتجر</a>
                   </div>
-          webhook_url = "https://hooks.zapier.com/hooks/catch/23486054/uo015mm/"
-
-requests.post(webhook_url, json={
-    "name": name,
-    "phone": phone,
-    "address": address,
-    "region": region,
-    "payment": payment_method,
-    "notes": notes,
-    "total": total,
-    "products": cart
-})
               </body>
               </html>
               """,
