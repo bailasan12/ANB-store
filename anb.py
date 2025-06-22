@@ -5025,6 +5025,9 @@ def add_to_cart():
     session['cart'] = cart
     session.modified = True
 
+    with open("orders.txt", "a", encoding="utf-8") as f:
+     f.write(f"PID: {pid}, Name: {product['name']}, Color: {color}, Size: {size}, Quantity: {quantity}, Price: {product['price']}\n")
+
     print("🛒 Current Cart:", session['cart'])
     return redirect(url_for('cart'))
 
@@ -5517,7 +5520,6 @@ def submit_order():
     session.pop('cart', None)
 
     return "تم استلام الطلب بنجاح! شكرًا لك."
-
 
 if __name__ == '__main__':
   port = int(os.environ.get("PORT", 5000))
