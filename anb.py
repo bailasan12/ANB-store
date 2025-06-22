@@ -5088,6 +5088,7 @@ def checkout():
                 "total": total,
                 "products": cart
             })
+          
         except Exception as e:
             print("فشل ارسال البيانات للـ Zapier:", e)
         return render_template_string("""
@@ -5524,7 +5525,20 @@ def submit_order():
         f.write(f"رسوم التوصيل: {delivery_fee} شيكل\n")
         f.write(f"المجموع الكلي: {total} شيكل\n")
         f.write("==================\n\n")
-
+    webhook_url = "https://hooks.zapier.com/hooks/catch/23486054/uo015mm/"
+    try:
+        requests.post(webhook_url, json={
+            "name": name,
+            "whatsapp": whatsapp,
+            "address": address,
+            "payment_method": payment_method,
+            "delivery_method": delivery_method,
+            "delivery_fee": delivery_fee,
+            "total": total,
+            "products": cart_items
+        })
+    except Exception as e:
+        print("خطأ أثناء الإرسال إلى Zapier:", e)
     # ممكن تمسح السلة بعد الطلب
     session.pop('cart', None)
 
