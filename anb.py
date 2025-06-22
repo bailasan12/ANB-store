@@ -4832,10 +4832,7 @@ window.onload = function () {
 
     </body>
     </html>
-    ''',
-                                  products=filtered,
-                                  query=query)
-
+    ''',products=filtered,query=query)
 
 @app.route('/cart', methods=['GET', 'POST'])
 def cart():
