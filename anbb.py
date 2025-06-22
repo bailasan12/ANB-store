@@ -21,6 +21,7 @@ def index():
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+                              
     <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -34,7 +35,19 @@ def index():
       background-color: #f1f1f1;
       overflow-x: hidden;
     }
-
+  /* التصميم لأجهزة أكبر من 768px */
+@media (min-width: 768px) {
+  .products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+/* لأجهزة أكبر من 1024px */
+@media (min-width: 1024px) {
+  .product {
+    width: 30%;
+  }
+}
     header {
       background-color: #f1f1f2;
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
@@ -155,57 +168,6 @@ def index():
   font-family: "Font Awesome 6 Brands" !important;
   font-weight: 400; /* أو  normal */
 }
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-  .search-form input[type="text"] {
-    width: 100%;
-  }
-
-  nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 10px;
-  }
-
-  .sections form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .sections button {
-    width: 80%;
-    max-width: 300px;
-    margin: 10px auto;
-  }
-
-  .banner {
-    font-size: 24px;
-    height: 250px;
-    padding: 0 10px;
-  }
-
-  .welcome {
-    font-size: 18px;
-    padding: 0 10px;
-  }
-
-  footer div {
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  footer a {
-    margin: 0 10px;
-  }
-}
 
   </style>
 </head>
@@ -320,6 +282,7 @@ def index():
   footer a:hover {
     transform: translateY(-4px) scale(1.05);
   }
+
 </style>
 
 <script>
@@ -4915,82 +4878,82 @@ def submit_order():
     return "تم استلام الطلب بنجاح! شكرًا لك."
 
 # SQLite connection
-##def get_db_connection():
+def get_db_connection():
 
-    ##conn = sqlite3.connect('database.db')
-    ##conn.row_factory = sqlite3.Row
-  ##  return conn
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    return conn
 
 # ---------- Initialize DB once (run once) ----------
-# with get_db_connection() as conn:
-#     conn.execute('''
-#         CREATE TABLE IF NOT EXISTS users (
-#             id INTEGER PRIMARY KEY AUTOINCREMENT,
-#             username TEXT UNIQUE NOT NULL,
-#             password TEXT NOT NULL
-#         )
-#     ''')
-#     conn.commit()
+with get_db_connection() as conn:
+     conn.execute('''
+       CREATE TABLE IF NOT EXISTS users (
+             id INTEGER PRIMARY KEY AUTOINCREMENT,
+             username TEXT UNIQUE NOT NULL,
+             password TEXT NOT NULL
+         )
+     ''')
+     conn.commit()
 
 # ---------- Templates ----------
-##register_template = '''
-##<!DOCTYPE html>
-##<html lang="ar" dir="rtl">
-##<head>
-  ##<meta charset="UTF-8">
-  ##<title>إنشاء حساب</title>
-  ##<style>
-    ##body {
-      ##font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      ##background: linear-gradient(to bottom right, #dbeafe, #ffffff);
-      ##margin: 0;
-      ##padding: 0;
-      ##display: flex;
-      ##justify-content: center;
-      ##align-items: center;
-      ##height: 100vh;
-    ##}
+register_template = '''
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>إنشاء حساب</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #dbeafe, #ffffff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-    ##.container {
-      ##background: #fff;
-      ##padding: 40px 30px;
-      ##border-radius: 16px;
-      ##box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      ##width: 90%;
-      ##max-width: 400px;
-      ##text-align: center;
-    ##}
+    .container {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
 
-    ##h2 {
-      ##margin-bottom: 30px;
-      ##font-size: 28px;
-      ##color: #1e3a8a;
-    ##}
+    h2 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: #1e3a8a;
+    }
 
-    ##form {
-      ##display: flex;
-      ##flex-direction: column;
-      ##gap: 20px;
-    ##}
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-    ##input[type="text"],
-    ##input[type="password"] {
-      ##padding: 14px 16px;
-      ##font-size: 18px;
-      ##border: 1px solid #ccc;
-      ##border-radius: 8px;
-      ##transition: border-color 0.3s ease;
-    ##}
+    input[type="text"],
+    input[type="password"] {
+      padding: 14px 16px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+    }
 
-    ##input:focus {
-      ##border-color: #2563eb;
-      ##outline: none;
-    ##}
+    input:focus {
+      border-color: #2563eb;
+      outline: none;
+    }
 
-    ##button {
-      ##background-color: #2563eb;
-      ##color: white;
-     ## padding: 14px;
+    button {
+      background-color: #2563eb;
+      color: white;
+      padding: 14px;
      ## font-size: 18px;
       ##border: none;
       ##border-radius: 8px;
