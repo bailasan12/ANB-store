@@ -5058,7 +5058,7 @@ def checkout():
 
         total += delivery_price
 
-        with open('orders.txt', 'a', encoding='utf-8') as f:
+        with open('orders_new.txt', 'a', encoding='utf-8') as f:
             f.write("=== طلب جديد ===\n")
             f.write(f"الاسم: {name}\n")
             f.write(f"رقم الواتساب: {phone}\n")
@@ -5134,6 +5134,18 @@ def checkout():
                       <p>💰 المبلغ الإجمالي: {{ total }} شيكل</p>
                       <a href="/">العودة للمتجر</a>
                   </div>
+          webhook_url = "https://hooks.zapier.com/hooks/catch/23486054/uo015mm/"
+
+requests.post(webhook_url, json={
+    "name": name,
+    "phone": phone,
+    "address": address,
+    "region": region,
+    "payment": payment_method,
+    "notes": notes,
+    "total": total,
+    "products": cart
+})
               </body>
               </html>
               """,
