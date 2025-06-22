@@ -5409,7 +5409,6 @@ template = """
         <nav>
             <a href="/"><i class="fas fa-home"></i></a>
             <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
-            <a href="#"><i class="fas fa-phone-alt"></i></a>
             <a href="/favorites"><i class="fas fa-heart"></i></a>
         </nav>
     </header>
