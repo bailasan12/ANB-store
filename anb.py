@@ -533,6 +533,14 @@ def products_page():
             "https://files.cdn-files-a.com/uploads/6243106/400_6684411d02014.jpg",
             "description": "هودي الصندوق"
         },
+        {
+            "pid": "20",
+            "name": "المُبرمج",
+            "price": 69.99,
+            "image":
+            "https://files.cdn-files-a.com/uploads/6243106/normal_68592eacec264.png",
+            "description": "هودي المُبرمج"
+        },
     ]
     print("Query:", query)
     print("Products:", products)
@@ -980,7 +988,25 @@ function toggleFavorite(icon) {
   <i class="fa-regular fa-heart favorite-icon" onclick="toggleFavorite(this, '1')"></i>
 
 </div>
+<div class="product" 
+     data-pid="20"
+     data-title="هودي 'المُبرمج'" 
+     data-description= " هودي شتوي دافئ بتصميم مميز 'المُبرمج '" 
+     data-price-new="₪69.99"
+     data-colors="black,#183B4E,white"  
+     data-img="https://files.cdn-files-a.com/uploads/6243106/normal_68592eacec264.png">
 
+  <img src="https://files.cdn-files-a.com/uploads/6243106/normal_68592eacec264.png" alt="منتج">
+  <h3>هودي " المُبرمج "</h3>
+  <div class="price">
+    <span class="new-price">₪69.99</span>
+  </div>
+
+  <button onclick="openModal(this, 'details')">عرض التفاصيل</button>
+  <button class="buy-btn" onclick="openModal(this, 'buy')">شراء الآن</button>
+  <i class="fa-regular fa-heart favorite-icon" onclick="toggleFavorite(this,'20')"></i>
+
+</div>
 <div class="product" 
      data-pid="2"
      data-title="هودي 'المهندس'" 
@@ -4100,6 +4126,13 @@ products_data = [
         "https://files.cdn-files-a.com/uploads/6243106/400_6684411d02014.jpg",
         "description": "هودي الصندوق"
     },
+    {           
+        "pid": "20",
+        "name": "المُبرمج",
+        "price": 69.99,
+        "image":"https://files.cdn-files-a.com/uploads/6243106/normal_68592eacec264.png",
+        "description": "هودي المُبرمج"
+    },
 ]
 # ✅ قائمة موحدة لجميع المنتجات
 products = [
@@ -4263,6 +4296,13 @@ products = [
         "image":
         "https://files.cdn-files-a.com/uploads/6243106/400_6684411d02014.jpg",
         "description": "هودي الصندوق"
+    },
+    {           
+        "pid": "20",
+        "name": "المُبرمج",
+        "price": 69.99,
+        "image":"https://files.cdn-files-a.com/uploads/6243106/normal_68592eacec264.png",
+        "description": "هودي المُبرمج"
     },
 ]
 
